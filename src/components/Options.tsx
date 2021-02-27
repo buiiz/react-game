@@ -13,16 +13,17 @@ const useStyles = makeStyles({
   },
 });
 
-const Menu: React.FC = () => {
+const Settings: React.FC = () => {
   const classes = useStyles();
 
   return <div className={classes.list}>
-    <h1>Tic Tac Toe</h1>
-    <NavButton size='large' to='/game'>Game</NavButton>
-    <NavButton size='large' to='/options'>Options</NavButton>
-    <NavButton size='large' to='/statistics'>Statistics</NavButton>
-    <NavButton size='large' to='/info'>Info</NavButton>
+    <h2>Options</h2>
+    <p>Sound</p>
+    <p>Music</p>
+    <p>Theme</p>
+    <p>Fullscreen</p>
+    <NavButton to='/'>Back</NavButton>
   </div>;
-}
+};
 
-export default Menu;
+export default Settings;

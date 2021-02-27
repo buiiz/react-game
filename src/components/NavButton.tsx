@@ -1,29 +1,30 @@
 import React from "react";
-import { Button } from '@material-ui/core';
+import { Button, PropTypes } from '@material-ui/core';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
 
 interface NavButtonProps {
-  text: string;
+  children: string;
   to: string;
-  variant?: 'text' | 'outlined' | 'contained'
+  variant?: 'text' | 'outlined' | 'contained';
+  size?: 'small' | 'medium' | 'large';
+  color?: PropTypes.Color;
 }
 
-const NavButton = ({ text, to, variant = 'text' }: NavButtonProps) => {
-  const renderLink = React.useMemo(
-    () => React.forwardRef<any, Omit<RouterLinkProps, 'to'>>(
-      (itemProps, ref) => (
-        <RouterLink to={to} ref={ref} {...itemProps} />
-      )),
-    [to]
+const NavButton = (props: NavButtonProps) => {
+  const { children, to, variant = 'text', size = 'medium', color = 'primary' } = props
+
+  const renderLink = React.forwardRef<any, Omit<RouterLinkProps, 'to'>>(
+    (itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />
   );
 
   return (
     <Button
       component={renderLink}
       variant={variant}
-      size='large'
-      color="primary">
-      {text}
+      size={size}
+      color={color}
+    >
+      {children}
     </Button>
   );
 }

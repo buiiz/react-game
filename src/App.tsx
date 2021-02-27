@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Board from "./components/Board";
 import Info from "./components/Info";
 import Menu from "./components/Menu";
-import Settings from "./components/Settings";
+import Options from "./components/Options";
 import Statistics from "./components/Statistics";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
           <Route exact path="/" component={Menu} />
           <Route path="/game" component={Board} />
           <Route path="/info" component={Info} />
-          <Route path="/settings" component={Settings} />
+          <Route path="/options" component={Options} />
           <Route path="/statistics" component={Statistics} />
           <Redirect to="/" />
         </Switch>
