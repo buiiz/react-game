@@ -1,5 +1,4 @@
-import { useActions } from "../hooks/useActions";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions, useTypedSelector } from "../hooks";
 
 const Counter: React.FC = () => {
   const { value } = useTypedSelector(state => state.counter);
