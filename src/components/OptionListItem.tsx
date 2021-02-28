@@ -11,7 +11,7 @@ const OptionListItem = ({ children, icon, checked, onChange }: OptionListItemPro
   return (
     <ListItem>
       <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={children} />
+      <ListItemText>{children}</ListItemText>
       <ListItemSecondaryAction>
         <Switch
           color="primary"

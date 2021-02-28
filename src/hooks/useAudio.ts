@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export const useAudio = (url: string, autorepaly: boolean) => {
   const audio = useMemo(() => new Audio(url), [url]);

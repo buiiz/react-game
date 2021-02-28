@@ -1,9 +1,8 @@
-import { makeStyles } from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import NavButton from "./NavButton";
 
 const useStyles = makeStyles({
   list: {
-    width: '100vw',
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
@@ -16,13 +15,14 @@ const useStyles = makeStyles({
 const Menu: React.FC = () => {
   const classes = useStyles();
 
-  return <div className={classes.list}>
-    <h1>Tic Tac Toe</h1>
+  return <Box className={classes.list}>
+    <Typography variant="h3" component={'h1'}>Tic Tac Toe</Typography>
+
     <NavButton size='large' to='/game'>Game</NavButton>
     <NavButton size='large' to='/options'>Options</NavButton>
     <NavButton size='large' to='/statistics'>Statistics</NavButton>
     <NavButton size='large' to='/info'>Info</NavButton>
-  </div>;
+  </Box>;
 }
 
 export default Menu;
