@@ -1,8 +1,11 @@
 import { OptionsAction, OptionsActionTypes, OptionsState } from "../../types/options";
+import * as localStorage from "../../utils/localStorage";
+
+const state = localStorage.get('options')
 
 const initialState: OptionsState = {
-  isSound: true,
-  isMusic: false,
+  isSound: state?.isSound ?? true,
+  isMusic: state?.isMusic ?? false,
   isFullscreen: false,
 }
 

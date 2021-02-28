@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createStyles, List, makeStyles, Theme, Typography } from "@material-ui/core";
 import { FullscreenRounded, MusicNoteRounded, VolumeUpRounded } from '@material-ui/icons';
 import { useActions, useTypedSelector } from "../hooks";
 import NavButton from "./NavButton";
 import OptionListItem from "./OptionListItem";
+import * as localStorage from "../utils/localStorage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,15 @@ const Settings: React.FC = () => {
   const classes = useStyles();
   const { isSound, isMusic, isFullscreen } = useTypedSelector(state => state.options);
   const { toggleSound, toggleMusic, toggleFullscreen } = useActions();
+
+  useEffect(() => {
+    localStorage.set('options', {
+      isSound,
+      isMusic,
+      isFullscreen
+    })
+  }, [isSound, isMusic, isFullscreen])
+
 
   return <div className={classes.root}>
     <Typography variant="h4" component={'h2'}>Options</Typography>
