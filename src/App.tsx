@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { useAudio } from './hooks';
 import { useTypedSelector } from "./hooks";
 import { setFullscreen } from "./utils/fullscreen";
-import Board from "./components/Board";
+import Game from "./components/Game";
 import Info from "./components/Info";
 import Menu from "./components/Menu";
 import Options from "./components/Options";
-import Statistics from "./components/Statistics";
+import History from "./components/History";
 
 const App = () => {
   const { isFullscreen, isMusic } = useTypedSelector(state => state.options);
@@ -26,10 +26,10 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Menu} />
-        <Route path="/game" component={Board} />
+        <Route path="/game" component={Game} />
         <Route path="/info" component={Info} />
         <Route path="/options" component={Options} />
-        <Route path="/statistics" component={Statistics} />
+        <Route path="/history" component={History} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>
