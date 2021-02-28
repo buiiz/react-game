@@ -1,26 +1,24 @@
 import React, { useEffect } from "react";
-import { createStyles, List, makeStyles, Theme, Typography } from "@material-ui/core";
+import { List, makeStyles, Typography } from "@material-ui/core";
 import { FullscreenRounded, MusicNoteRounded, VolumeUpRounded } from '@material-ui/icons';
 import { useActions, useTypedSelector } from "../hooks";
 import NavButton from "./NavButton";
 import OptionListItem from "./OptionListItem";
 import * as localStorage from "../utils/localStorage";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    options: {
-      width: '100%',
-      maxWidth: 360,
-    },
-    root: {
-      height: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  }),
-);
+const useStyles = makeStyles({
+  options: {
+    width: '100%',
+    maxWidth: 360,
+  },
+  root: {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 const Settings: React.FC = () => {
   const classes = useStyles();

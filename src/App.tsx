@@ -15,6 +15,7 @@ const App = () => {
 
   useEffect(() => {
     isMusic ? toggle(true) : toggle(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMusic]);
 
   useEffect(() => {

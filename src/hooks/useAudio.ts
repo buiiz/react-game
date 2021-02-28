@@ -17,6 +17,7 @@ export const useAudio = (url: string, autorepaly: boolean) => {
   useEffect(() => {
     playing ? audio.play() : audio.pause();
   },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [playing]
   );
 
@@ -25,6 +26,7 @@ export const useAudio = (url: string, autorepaly: boolean) => {
     return () => {
       audio.removeEventListener('ended', () => setPlaying(false));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { play: audio.play, pause: audio.pause, toggle };
