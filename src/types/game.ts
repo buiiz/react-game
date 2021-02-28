@@ -1,17 +1,24 @@
-export type PlayerType = 'x' | 'o' | null
+export type PlayerType = 'x' | 'o' | 'draw' | null
 export type GameStateType = Array<PlayerType>
+export type HistoryItemType = {
+  date: Date;
+  winner: PlayerType
+  moves: number;
+}
+export type HistoryType = Array<HistoryItemType>
 
 export interface GameState {
   gameState: GameStateType;
   currentPlayer: PlayerType;
   moves: number;
-  // history: 
+  history: HistoryType;
 }
 
 export enum GameActionTypes {
   NEW_GAME = 'NEW_GAME',
   CLOSE_GAME = 'CLOSE_GAME',
   MOVE = 'MOVE',
+  ADD_HISTORY_RECORD = 'ADD_HISTORY_RECORD',
 }
 
 export interface NewGameAction {
@@ -24,5 +31,9 @@ export interface MoveAction {
   type: GameActionTypes.MOVE;
   payload: number;
 }
+export interface AddHistoryRecordAction {
+  type: GameActionTypes.ADD_HISTORY_RECORD;
+  payload: HistoryItemType;
+}
 
-export type GameAction = NewGameAction | CloseGameAction | MoveAction;
+export type GameAction = NewGameAction | CloseGameAction | MoveAction | AddHistoryRecordAction;

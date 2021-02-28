@@ -5,6 +5,8 @@ import { checkDraw, checkWin } from "../../utils/checkWin";
 import NavButton from "../NavButton";
 import Board from "./Board";
 import * as localStorage from "../../utils/localStorage";
+import { PlayerType } from "../../types/game";
+
 
 const useStyles = makeStyles({
   root: {
@@ -30,10 +32,9 @@ const useStyles = makeStyles({
 
 const Game: React.FC = () => {
   const classes = useStyles();
-  const { newGame, closeGame } = useActions();
-  const { moves, gameState, currentPlayer } = useTypedSelector(state => state.game);
-  const [winner, setWinner] = useState(null)
-  const [draw, setDraw] = useState(false)
+  const { newGame, closeGame, newHistoryRecord } = useActions();
+  const { moves, gameState, currentPlayer, history } = useTypedSelector(state => state.game);
+  const [winner, setWinner] = useState<PlayerType>(null)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -45,21 +46,34 @@ const Game: React.FC = () => {
   })
 
   useEffect(() => {
+    localStorage.set('history', history)
+  }, [history])
+
+  useEffect(() => {
+    const handleGameEnd = (winner: PlayerType) => {
+      newHistoryRecord({
+        date: new Date(),
+        winner,
+        moves,
+      })
+    }
+
     const winner = checkWin(gameState);
     const draw = checkDraw(gameState);
 
     if (winner) {
+      handleGameEnd(winner)
       setWinner(winner);
       setOpen(true);
     } else if (draw) {
-      setDraw(true);
+      handleGameEnd('draw')
+      setWinner('draw');
       setOpen(true);
     }
   }, [gameState])
 
   const handleNewGame = () => {
     setWinner(null);
-    setDraw(false);
     setOpen(false)
     newGame();
   }
@@ -78,7 +92,7 @@ const Game: React.FC = () => {
         <div className={classes.paper}>
           {winner === 'x' ? <h2 id="transition-modal-title">You won</h2> : null}
           {winner === 'o' ? <h2 id="transition-modal-title">You lose</h2> : null}
-          {draw === true ? <h2 id="transition-modal-title">Draw</h2> : null}
+          {winner === 'draw' ? <h2 id="transition-modal-title">Draw</h2> : null}
           <NavButton to='/game' onClick={handleNewGame}>New Game</NavButton>
           <NavButton to='/' onClick={closeGame}>Back</NavButton>
         </div>

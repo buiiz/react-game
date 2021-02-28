@@ -4,7 +4,9 @@ import {
   NewGameAction,
   GameActionTypes,
   MoveAction,
-  CloseGameAction
+  CloseGameAction,
+  AddHistoryRecordAction,
+  HistoryItemType
 } from "../../types/game";
 
 export const newGame = () => (dispatch: Dispatch<NewGameAction>) => {
@@ -17,4 +19,8 @@ export const closeGame = () => (dispatch: Dispatch<CloseGameAction>) => {
 
 export const move = (id: number) => (dispatch: Dispatch<MoveAction>) => {
   return dispatch({ type: GameActionTypes.MOVE, payload: id });
+}
+
+export const newHistoryRecord = (record: HistoryItemType) => (dispatch: Dispatch<AddHistoryRecordAction>) => {
+  return dispatch({ type: GameActionTypes.ADD_HISTORY_RECORD, payload: record });
 }
