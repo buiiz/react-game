@@ -1,6 +1,6 @@
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { useAudio } from './hooks';
 import { useTypedSelector } from "./hooks";
 import { setFullscreen } from "./utils/fullscreen";
 import Board from "./components/Board";
@@ -10,30 +10,28 @@ import Options from "./components/Options";
 import Statistics from "./components/Statistics";
 
 const App = () => {
-  const { isDarkTheme, isFullscreen } = useTypedSelector(state => state.options);
-  const theme = createMuiTheme({
-    palette: { type: isDarkTheme ? 'dark' : 'light', }
-  });
+  const { isFullscreen, isMusic } = useTypedSelector(state => state.options);
+  const { toggle } = useAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', true);
+
+  useEffect(() => {
+    isMusic ? toggle(true) : toggle(false);
+  }, [isMusic]);
 
   useEffect(() => {
     setFullscreen(isFullscreen)
   }, [isFullscreen])
 
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <div className="App">
-          <Switch>
-            <Route exact path="/" component={Menu} />
-            <Route path="/game" component={Board} />
-            <Route path="/info" component={Info} />
-            <Route path="/options" component={Options} />
-            <Route path="/statistics" component={Statistics} />
-            <Redirect to="/" />
-          </Switch>
-        </div>
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Menu} />
+        <Route path="/game" component={Board} />
+        <Route path="/info" component={Info} />
+        <Route path="/options" component={Options} />
+        <Route path="/statistics" component={Statistics} />
+        <Redirect to="/" />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

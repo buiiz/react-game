@@ -3,7 +3,6 @@ import {
   ToggleSoundAction,
   ToggleMusicAction,
   ToggleFullscreenAction,
-  ToggleThemeAction,
   OptionsActionTypes
 } from "../../types/options";
 
@@ -17,8 +16,4 @@ export const toggleMusic = (value?: boolean) => (dispatch: Dispatch<ToggleMusicA
 
 export const toggleFullscreen = (value?: boolean) => (dispatch: Dispatch<ToggleFullscreenAction>) => {
   return dispatch({ type: OptionsActionTypes.TOGGLE_FULLSCREEN, payload: value });
-}
-
-export const toggleTheme = (value?: boolean) => (dispatch: Dispatch<ToggleThemeAction>) => {
-  return dispatch({ type: OptionsActionTypes.TOGGLE_THEME, payload: value });
 }

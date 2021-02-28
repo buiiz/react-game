@@ -2,8 +2,7 @@ import { OptionsAction, OptionsActionTypes, OptionsState } from "../../types/opt
 
 const initialState: OptionsState = {
   isSound: true,
-  isMusic: true,
-  isDarkTheme: false,
+  isMusic: false,
   isFullscreen: false,
 }
 
@@ -15,8 +14,6 @@ export const optionsReducer = (state = initialState, action: OptionsAction): Opt
       return { ...state, isMusic: (action.payload !== undefined) ? action.payload : !state.isMusic };
     case OptionsActionTypes.TOGGLE_FULLSCREEN:
       return { ...state, isFullscreen: (action.payload !== undefined) ? action.payload : !state.isFullscreen };
-    case OptionsActionTypes.TOGGLE_THEME:
-      return { ...state, isDarkTheme: (action.payload !== undefined) ? action.payload : !state.isDarkTheme };
     default:
       return state;
   }
