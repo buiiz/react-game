@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Zoom } from "@material-ui/core";
 import { useActions, useTypedSelector } from "../../hooks";
 import { PlayerType } from "../../types/game";
 import { FaTimes } from 'react-icons/fa';
@@ -31,9 +31,9 @@ const Square: React.FC<SquareProps> = ({ state, id }) => {
 
   const showIcon = () => {
     if (state === 'x') {
-      return <FaTimes />
+      return <Zoom in><FaTimes /></Zoom>
     } else if (state === 'o') {
-      return <BiCircle />
+      return <Zoom in><BiCircle /></Zoom>
     } else {
       return null
     }
