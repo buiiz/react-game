@@ -20,6 +20,8 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     gap: '1rem',
+    padding: '1rem',
+    boxSizing: 'border-box',
   },
   table: {
     maxWidth: 650,
