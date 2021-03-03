@@ -1,8 +1,7 @@
 import { makeStyles, Zoom } from "@material-ui/core";
 import { useActions, useTypedSelector } from "../../hooks";
 import { PlayerType } from "../../types/game";
-import { FaTimes } from 'react-icons/fa';
-import { BiCircle } from 'react-icons/bi';
+import { MdClose, MdRadioButtonUnchecked } from 'react-icons/md';
 
 const useStyles = makeStyles({
   root: {
@@ -31,9 +30,9 @@ const Square: React.FC<SquareProps> = ({ state, id }) => {
 
   const showIcon = () => {
     if (state === 'x') {
-      return <Zoom in><FaTimes /></Zoom>
+      return <Zoom in><MdClose /></Zoom>
     } else if (state === 'o') {
-      return <Zoom in><BiCircle /></Zoom>
+      return <Zoom in><MdRadioButtonUnchecked /></Zoom>
     } else {
       return null
     }
