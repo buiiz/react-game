@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import NavButton from './NavButton';
-import { CardMedia, Link } from '@material-ui/core';
+import { CardMedia, Link, List, ListItem, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +29,10 @@ const useStyles = makeStyles({
   year: {
     marginTop: 8,
     marginBottom: -16,
+  },
+  list: {
+    margin: 0,
+    padding: 0,
   }
 });
 
@@ -50,6 +54,19 @@ const Info: React.FC = () => {
         <Typography variant="body2" component="p">
           Created by Buiiz for <Link href='https://rs.school/js/'>"RS School"</Link>
         </Typography>
+        <br />
+        <Typography variant="h6" component="h3" className={classes.title}>Hot Keys:</Typography>
+        <List dense={true} className={classes.list}>
+          <ListItem>
+            <ListItemText primary="ctrl + alt + n" secondary='new game' />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="ctrl + alt + k" secondary='toggle music' />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="ctrl + alt + f" secondary='toggle fullscreen' />
+          </ListItem>
+        </List>
         <Typography variant="body2" component="p" color="textSecondary" className={classes.year}>2021</Typography>
       </CardContent>
       <CardActions>

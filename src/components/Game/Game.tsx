@@ -70,6 +70,7 @@ const Game: React.FC = () => {
       setWinner('draw');
       setOpen(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState])
 
   const handleNewGame = () => {
