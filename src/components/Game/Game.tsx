@@ -6,6 +6,7 @@ import NavButton from "../NavButton";
 import Board from "./Board";
 import * as localStorage from "../../utils/localStorage";
 import { PlayerType } from "../../types/game";
+import { moveO } from "../../utils/ai";
 
 
 const useStyles = makeStyles({
@@ -32,9 +33,9 @@ const useStyles = makeStyles({
 
 const Game: React.FC = () => {
   const classes = useStyles();
-  const { newGame, closeGame, newHistoryRecord } = useActions();
+  const { newGame, closeGame, newHistoryRecord, move } = useActions();
   const { moves, gameState, currentPlayer, history } = useTypedSelector(state => state.game);
-  const [winner, setWinner] = useState<PlayerType>(null)
+  const [winner, setWinner] = useState<PlayerType>('')
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -44,6 +45,16 @@ const Game: React.FC = () => {
       currentPlayer
     })
   })
+
+  useEffect(() => {
+    if (currentPlayer === 'O') {
+      console.log(gameState);
+      const id = moveO(gameState) - 1
+      console.log(id);
+      setTimeout(() => move(id), 200)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState])
 
   useEffect(() => {
     localStorage.set('history', history)
@@ -74,7 +85,7 @@ const Game: React.FC = () => {
   }, [gameState])
 
   const handleNewGame = () => {
-    setWinner(null);
+    setWinner('');
     setOpen(false)
     newGame();
   }
@@ -91,8 +102,8 @@ const Game: React.FC = () => {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          {winner === 'x' ? <h2 id="transition-modal-title">You won</h2> : null}
-          {winner === 'o' ? <h2 id="transition-modal-title">You lose</h2> : null}
+          {winner === 'X' ? <h2 id="transition-modal-title">You won</h2> : null}
+          {winner === 'O' ? <h2 id="transition-modal-title">You lose</h2> : null}
           {winner === 'draw' ? <h2 id="transition-modal-title">Draw</h2> : null}
           <NavButton to='/game' onClick={handleNewGame}>New Game</NavButton>
           <NavButton to='/' onClick={closeGame}>Back</NavButton>

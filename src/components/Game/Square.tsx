@@ -29,9 +29,9 @@ const Square: React.FC<SquareProps> = ({ state, id }) => {
   const { gameState } = useTypedSelector(state => state.game);
 
   const showIcon = () => {
-    if (state === 'x') {
+    if (state === 'X') {
       return <Zoom in><MdClose /></Zoom>
-    } else if (state === 'o') {
+    } else if (state === 'O') {
       return <Zoom in><MdRadioButtonUnchecked /></Zoom>
     } else {
       return null
@@ -39,7 +39,7 @@ const Square: React.FC<SquareProps> = ({ state, id }) => {
   }
 
   const handleClick = () => {
-    if (gameState[id] === null) {
+    if (gameState[id] === '') {
       move(id)
     }
   }

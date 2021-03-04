@@ -15,7 +15,7 @@ export const checkWin = (state: GameStateType) => {
   let res = null;
 
   lines.forEach(([a, b, c]) => {
-    if (state[a] && state[a] === state[b] && state[a] === state[c]) {
+    if (state[a] !== '' && state[a] === state[b] && state[a] === state[c]) {
       res = state[a];
     }
   })
@@ -24,5 +24,5 @@ export const checkWin = (state: GameStateType) => {
 }
 
 export const checkDraw = (state: GameStateType) => {
-  return state.filter(player => player !== null).length === state.length
+  return state.filter(player => player !== '').length === state.length
 }

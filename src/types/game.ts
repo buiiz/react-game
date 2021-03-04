@@ -1,4 +1,4 @@
-export type PlayerType = 'x' | 'o' | 'draw' | null
+export type PlayerType = 'X' | 'O' | 'draw' | ''
 export type GameStateType = Array<PlayerType>
 export type HistoryItemType = {
   date: Date;
