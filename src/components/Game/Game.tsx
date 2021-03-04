@@ -1,6 +1,6 @@
 import { Box, Fade, makeStyles, Modal } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { useActions, useTypedSelector } from "../../hooks";
+import { useActions, useAudio, useTypedSelector } from "../../hooks";
 import { checkDraw, checkWin } from "../../utils/checkWin";
 import NavButton from "../NavButton";
 import Board from "./Board";
@@ -35,8 +35,19 @@ const Game: React.FC = () => {
   const classes = useStyles();
   const { newGame, closeGame, newHistoryRecord, move } = useActions();
   const { moves, gameState, currentPlayer, history } = useTypedSelector(state => state.game);
+  const { isSound } = useTypedSelector(state => state.options);
   const [winner, setWinner] = useState<PlayerType>('')
   const [open, setOpen] = useState(false)
+  const { toggle } = useAudio('https://www.fesliyanstudios.com/play-mp3/7757', false);
+
+  useEffect(() => {
+    if (isSound && (gameState.includes('X') || gameState.includes('O'))) {
+      toggle(true)
+    } else {
+      toggle(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState]);
 
   useEffect(() => {
     localStorage.set('game', {
@@ -51,7 +62,7 @@ const Game: React.FC = () => {
       console.log(gameState);
       const id = moveO(gameState) - 1
       console.log(id);
-      setTimeout(() => move(id), 200)
+      setTimeout(() => move(id), 300)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState])

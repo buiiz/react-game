@@ -64,6 +64,9 @@ const Info: React.FC = () => {
             <ListItemText primary="ctrl + alt + k" secondary='toggle music' />
           </ListItem>
           <ListItem>
+            <ListItemText primary="ctrl + alt + s" secondary='toggle sounds' />
+          </ListItem>
+          <ListItem>
             <ListItemText primary="ctrl + alt + f" secondary='toggle fullscreen' />
           </ListItem>
         </List>

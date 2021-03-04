@@ -42,7 +42,7 @@ const Settings: React.FC = () => {
         icon={<VolumeUpRounded />}
         checked={isSound}
         onChange={() => toggleSound()}>
-        Sound (under development)
+        Sound
       </OptionListItem>
 
       <OptionListItem

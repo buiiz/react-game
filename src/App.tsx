@@ -12,7 +12,7 @@ import { setFullscreen } from "./utils/fullscreen";
 
 const App = () => {
   const history = useHistory();
-  const { toggleFullscreen, toggleMusic, newGame } = useActions();
+  const { toggleFullscreen, toggleMusic, newGame, toggleSound } = useActions();
   const { isFullscreen, isMusic } = useTypedSelector(state => state.options);
   const { toggle } = useAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', true);
 
@@ -32,10 +32,12 @@ const App = () => {
     if (e.ctrlKey && e.altKey && e.key === 'k') {
       toggleMusic();
     }
+    if (e.ctrlKey && e.altKey && e.key === 's') {
+      toggleSound();
+    }
     if (e.ctrlKey && e.altKey && e.key === 'n') {
       newGame();
       history.push("/game");
-      console.log("🚀 ~ file: HotKeys.tsx ~ line 19 ~ handleKeyUp ~ history", history)
     }
   }
 
