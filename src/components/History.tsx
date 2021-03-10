@@ -11,6 +11,7 @@ import { Typography } from '@material-ui/core';
 import NavButton from './NavButton';
 import { HistoryItemType } from "../types/game";
 import { useTypedSelector } from '../hooks';
+import { RootState } from '../store/reducers';
 
 const useStyles = makeStyles({
   root: {
@@ -30,8 +31,17 @@ const useStyles = makeStyles({
 
 const History: React.FC = () => {
   const classes = useStyles();
-  const { history } = useTypedSelector(state => state.game);
+  const selectHistory = (state: RootState) => state.game.history.reverse()
+  const history = useTypedSelector(selectHistory);
 
+  const showRecord = (row: HistoryItemType) => {
+    const hours = new Date(row.date).getHours();
+    const minutes = new Date(row.date).getMinutes();
+    const day = new Date(row.date).getDate();
+    const month = new Date(row.date).getMonth();
+    const year = new Date(row.date).getFullYear();
+    return `${hours}:${minutes} ${day}.${month}.${year}`
+  }
 
   return <div className={classes.root}>
     <Typography variant="h4" component={'h2'}>History</Typography>
@@ -46,21 +56,10 @@ const History: React.FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {[...history].reverse().map((row: HistoryItemType, id: number) => (
+          {history.map((row: HistoryItemType, id: number) => (
             <TableRow key={id}>
               <TableCell component="th" scope="row">
-                {
-                  [
-                    new Date(row.date).getHours(),
-                    new Date(row.date).getMinutes(),
-                  ].join(':')
-                  + ' ' +
-                  [
-                    new Date(row.date).getDate(),
-                    new Date(row.date).getMonth(),
-                    new Date(row.date).getFullYear(),
-                  ].join('.')
-                }
+                {showRecord(row)}
               </TableCell>
               <TableCell align="right">{row.winner}</TableCell>
               <TableCell align="right">{row.moves}</TableCell>
