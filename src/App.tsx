@@ -25,18 +25,24 @@ const App = () => {
   }, [isFullscreen])
 
   const handleKeyUp = (e: KeyboardEvent) => {
-    if (e.ctrlKey && e.altKey && e.key === 'f') {
-      toggleFullscreen();
-    }
-    if (e.ctrlKey && e.altKey && e.key === 'k') {
-      toggleMusic();
-    }
-    if (e.ctrlKey && e.altKey && e.key === 's') {
-      toggleSound();
-    }
-    if (e.ctrlKey && e.altKey && e.key === 'n') {
-      newGame();
-      history.push("/game");
+    if (e.ctrlKey && e.altKey) {
+      switch (e.code) {
+        case 'KeyF':
+          toggleFullscreen();
+          break;
+        case 'KeyK':
+          toggleMusic();
+          break;
+        case 'KeyS':
+          toggleSound();
+          break;
+        case 'KeyR':
+          newGame();
+          history.push("/game");
+          break;
+        default:
+          break;
+      }
     }
   }
 
