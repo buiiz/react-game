@@ -8,7 +8,6 @@ import * as StorageService from "../../utils/localStorage";
 import { PlayerType } from "../../types/game";
 import { moveO } from "../../utils/ai";
 
-
 const useStyles = makeStyles({
   root: {
     height: '100vh',
@@ -38,7 +37,7 @@ const Game: React.FC = () => {
   const { isSound } = useTypedSelector(state => state.options);
   const [winner, setWinner] = useState<PlayerType>('')
   const [open, setOpen] = useState(false)
-  const { toggle } = useAudio('https://www.fesliyanstudios.com/play-mp3/7757', false);
+  const { toggle } = useAudio('https://www.fesliyanstudios.com/play-mp3/7757');
 
   useEffect(() => {
     if (isSound && (gameState.includes('X') || gameState.includes('O'))) {

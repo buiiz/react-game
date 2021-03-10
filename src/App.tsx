@@ -7,14 +7,14 @@ import History from "./components/History";
 import Info from "./components/Info";
 import Menu from "./components/Menu";
 import Options from "./components/Options";
-import { useAudio, useTypedSelector } from './hooks';
+import { useMusic, useTypedSelector } from './hooks';
 import { setFullscreen } from "./utils/fullscreen";
 
 const App = () => {
   const history = useHistory();
   const { toggleFullscreen, toggleMusic, newGame, toggleSound } = useActions();
   const { isFullscreen, isMusic } = useTypedSelector(state => state.options);
-  const { toggle } = useAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', true);
+  const { toggle } = useMusic('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
 
   useEffect(() => {
     isMusic ? toggle(true) : toggle(false);
