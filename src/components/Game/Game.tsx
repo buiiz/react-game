@@ -40,7 +40,8 @@ const Game: React.FC = () => {
   const { toggle } = useAudio('https://www.fesliyanstudios.com/play-mp3/7757');
 
   useEffect(() => {
-    if (isSound && (gameState.includes('X') || gameState.includes('O'))) {
+    const isGameStarted = gameState.includes('X') || gameState.includes('O');
+    if (isSound && isGameStarted) {
       toggle(true)
     } else {
       toggle(false)
