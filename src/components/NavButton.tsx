@@ -14,6 +14,7 @@ interface NavButtonProps {
 const NavButton = (props: NavButtonProps) => {
   const { children, to, variant = 'text', size = 'medium', color = 'primary', onClick } = props
 
+  // eslint-disable-next-line react/display-name
   const renderLink = React.forwardRef<any, Omit<RouterLinkProps, 'to'>>(
     (itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />
   );

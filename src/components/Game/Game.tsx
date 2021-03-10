@@ -46,7 +46,6 @@ const Game: React.FC = () => {
     } else {
       toggle(false)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState]);
 
   useEffect(() => {
@@ -64,7 +63,6 @@ const Game: React.FC = () => {
       console.log(id);
       setTimeout(() => move(id), 300)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState])
 
   useEffect(() => {
@@ -92,7 +90,6 @@ const Game: React.FC = () => {
       setWinner('draw');
       setOpen(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState])
 
   const handleNewGame = () => {

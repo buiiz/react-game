@@ -52,7 +52,7 @@ const Info: React.FC = () => {
       <CardContent>
         <Typography variant="h4" component="h2" className={classes.title}>Info</Typography>
         <Typography variant="body2" component="p">
-          Created by Buiiz for <Link href='https://rs.school/js/'>"RS School"</Link>
+          Created by Buiiz for <Link href='https://rs.school/js/'>&quot;RS School&quot;</Link>
         </Typography>
         <br />
         <Typography variant="h6" component="h3" className={classes.title}>Hot Keys:</Typography>

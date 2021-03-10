@@ -18,7 +18,6 @@ const App = () => {
 
   useEffect(() => {
     isMusic ? toggle(true) : toggle(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMusic]);
 
   useEffect(() => {
@@ -46,7 +45,6 @@ const App = () => {
     return () => {
       document.addEventListener('keyup', handleKeyUp, false);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
