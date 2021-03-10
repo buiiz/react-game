@@ -55,11 +55,21 @@ const App = () => {
 
   return (
     <Switch>
-      <Route exact path="/" component={Menu} />
-      <Route path="/game" component={Game} />
-      <Route path="/info" component={Info} />
-      <Route path="/options" component={Options} />
-      <Route path="/history" component={History} />
+      <Route exact path="/">
+        <Menu />
+      </Route>
+      <Route path="/game" >
+        <Game />
+      </Route>
+      <Route path="/info" >
+        <Info />
+      </Route>
+      <Route path="/options">
+        <Options />
+      </Route>
+      <Route path="/history">
+        <History />
+      </Route>
       <Redirect to="/" />
     </Switch>
   );
