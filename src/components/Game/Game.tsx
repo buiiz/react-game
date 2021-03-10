@@ -54,7 +54,7 @@ const Game: React.FC = () => {
       gameState,
       currentPlayer
     })
-  }, [])
+  }, [moves, gameState, currentPlayer])
 
   useEffect(() => {
     if (currentPlayer === 'O') {
