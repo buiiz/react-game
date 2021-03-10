@@ -58,9 +58,7 @@ const Game: React.FC = () => {
 
   useEffect(() => {
     if (currentPlayer === 'O') {
-      console.log(gameState);
-      const id = moveO(gameState) - 1
-      console.log(id);
+      const id = moveO(gameState) - 1;
       setTimeout(() => move(id), 300)
     }
   }, [gameState])
