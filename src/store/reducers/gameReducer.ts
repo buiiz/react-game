@@ -1,8 +1,8 @@
 import { GameAction, GameActionTypes, GameState } from "../../types/game";
-import * as localStorage from "../../utils/localStorage";
+import * as StorageService from "../../utils/localStorage";
 
-const state = localStorage.get('game')
-const history = localStorage.get('history')
+const state = StorageService.get('game')
+const history = StorageService.get('history')
 
 const initialState: GameState = {
   gameState: state?.gameState ?? [],

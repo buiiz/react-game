@@ -4,7 +4,7 @@ import { useActions, useAudio, useTypedSelector } from "../../hooks";
 import { checkDraw, checkWin } from "../../utils/checkWin";
 import NavButton from "../NavButton";
 import Board from "./Board";
-import * as localStorage from "../../utils/localStorage";
+import * as StorageService from "../../utils/localStorage";
 import { PlayerType } from "../../types/game";
 import { moveO } from "../../utils/ai";
 
@@ -49,12 +49,12 @@ const Game: React.FC = () => {
   }, [gameState]);
 
   useEffect(() => {
-    localStorage.set('game', {
+    StorageService.set('game', {
       moves,
       gameState,
       currentPlayer
     })
-  })
+  }, [])
 
   useEffect(() => {
     if (currentPlayer === 'O') {
@@ -66,7 +66,7 @@ const Game: React.FC = () => {
   }, [gameState])
 
   useEffect(() => {
-    localStorage.set('history', history)
+    StorageService.set('history', history)
   }, [history])
 
   useEffect(() => {

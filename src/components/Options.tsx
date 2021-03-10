@@ -4,7 +4,7 @@ import { FullscreenRounded, MusicNoteRounded, VolumeUpRounded } from '@material-
 import { useActions, useTypedSelector } from "../hooks";
 import NavButton from "./NavButton";
 import OptionListItem from "./OptionListItem";
-import * as localStorage from "../utils/localStorage";
+import * as StorageService from "../utils/localStorage";
 
 const useStyles = makeStyles({
   options: {
@@ -26,7 +26,7 @@ const Settings: React.FC = () => {
   const { toggleSound, toggleMusic, toggleFullscreen } = useActions();
 
   useEffect(() => {
-    localStorage.set('options', {
+    StorageService.set('options', {
       isSound,
       isMusic,
       isFullscreen

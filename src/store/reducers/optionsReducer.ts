@@ -1,7 +1,7 @@
 import { OptionsAction, OptionsActionTypes, OptionsState } from "../../types/options";
-import * as localStorage from "../../utils/localStorage";
+import * as StorageService from "../../utils/localStorage";
 
-const state = localStorage.get('options')
+const state = StorageService.get('options')
 
 const initialState: OptionsState = {
   isSound: state?.isSound ?? true,
