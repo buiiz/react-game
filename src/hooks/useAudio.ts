@@ -20,10 +20,12 @@ export const useAudio = (url: string, autorepaly: boolean) => {
     [playing]
   );
 
+  const stopPlaying = () => setPlaying(false)
+
   useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
+    audio.addEventListener('ended', stopPlaying);
     return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
+      audio.removeEventListener('ended', stopPlaying);
     };
   }, []);
 
