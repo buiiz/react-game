@@ -1,7 +1,7 @@
 import { makeStyles, Zoom } from "@material-ui/core";
 import { useActions, useTypedSelector } from "../../hooks";
 import { PlayerType } from "../../types/game";
-import { MdClose, MdRadioButtonUnchecked } from 'react-icons/md';
+import { MdClose as MdCloseIcon, MdRadioButtonUnchecked as MdRadioButtonUncheckedIcon } from 'react-icons/md';
 
 const useStyles = makeStyles({
   root: {
@@ -29,12 +29,13 @@ const Square: React.FC<SquareProps> = ({ state, id }) => {
   const { gameState } = useTypedSelector(state => state.game);
 
   const showIcon = () => {
-    if (state === 'X') {
-      return <Zoom in><MdClose /></Zoom>
-    } else if (state === 'O') {
-      return <Zoom in><MdRadioButtonUnchecked /></Zoom>
-    } else {
-      return null
+    const isNotEmpty = state !== '';
+    if (isNotEmpty) {
+      return (
+        <Zoom in>
+          {state === 'X' ? <MdCloseIcon /> : <MdRadioButtonUncheckedIcon />}
+        </Zoom>
+      )
     }
   }
 
