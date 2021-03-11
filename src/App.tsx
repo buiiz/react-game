@@ -49,7 +49,7 @@ const App = () => {
   useEffect(() => {
     document.addEventListener('keyup', handleKeyUp, false);
     return () => {
-      document.addEventListener('keyup', handleKeyUp, false);
+      document.removeEventListener('keyup', handleKeyUp, false);
     };
   }, [])
 
