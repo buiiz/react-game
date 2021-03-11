@@ -1,8 +1,8 @@
 import React, { MouseEventHandler } from "react";
-import { Button, PropTypes } from '@material-ui/core';
+import { Button, ButtonProps, PropTypes } from '@material-ui/core';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
 
-interface NavButtonProps {
+interface NavButtonProps extends ButtonProps {
   children: string;
   to: string;
   variant?: 'text' | 'outlined' | 'contained';
