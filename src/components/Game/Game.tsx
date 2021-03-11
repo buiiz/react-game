@@ -46,7 +46,7 @@ const Game: React.FC = () => {
     } else {
       toggle(false)
     }
-  }, [gameState]);
+  }, [gameState, isSound]);
 
   useEffect(() => {
     StorageService.set('game', {
