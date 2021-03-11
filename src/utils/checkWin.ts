@@ -1,4 +1,4 @@
-import { GameStateType } from "../types/game";
+import { GameStateType, PlayerType } from "../types/game";
 
 const lines: Array<Array<number>> = [
   [0, 1, 2],
@@ -11,18 +11,20 @@ const lines: Array<Array<number>> = [
   [2, 4, 6]
 ]
 
-export const checkWin = (state: GameStateType) => {
-  let res = null;
+export const checkWin = (state: GameStateType): PlayerType | null => {
+  let res: PlayerType | null = null;
 
   lines.forEach(([a, b, c]) => {
-    if (state[a] !== '' && state[a] === state[b] && state[a] === state[c]) {
+    const isGameFinished = state[a] !== '' && state[a] === state[b] && state[a] === state[c]
+    if (isGameFinished) {
       res = state[a];
     }
   })
 
-  return res;
-}
+  const isGameFinished = state.filter(player => player !== '').length === state.length
+  if (isGameFinished) {
+    res = 'draw'
+  }
 
-export const checkDraw = (state: GameStateType) => {
-  return state.filter(player => player !== '').length === state.length
+  return res;
 }

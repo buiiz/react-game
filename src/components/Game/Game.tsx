@@ -1,7 +1,7 @@
-import { Box, Fade, makeStyles, Modal } from "@material-ui/core";
+import { Box, Fade, makeStyles, Modal, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useActions, useAudio, useTypedSelector } from "../../hooks";
-import { checkDraw, checkWin } from "../../utils/checkWin";
+import { checkWin } from "../../utils/checkWin";
 import NavButton from "../NavButton";
 import Board from "./Board";
 import * as StorageService from "../../utils/localStorage";
@@ -39,6 +39,14 @@ const Game: React.FC = () => {
   const [open, setOpen] = useState(false)
   const { toggle } = useAudio('https://www.fesliyanstudios.com/play-mp3/7757');
 
+  const handleGameEnd = (winner: PlayerType) => {
+    newHistoryRecord({
+      date: new Date(),
+      winner,
+      moves,
+    })
+  }
+
   useEffect(() => {
     const isGameStarted = gameState.includes('X') || gameState.includes('O');
     if (isSound && isGameStarted) {
@@ -61,31 +69,18 @@ const Game: React.FC = () => {
       const id = moveO(gameState) - 1;
       setTimeout(() => move(id), 300)
     }
-  }, [gameState])
+  }, [currentPlayer, gameState])
 
   useEffect(() => {
     StorageService.set('history', history)
   }, [history])
 
   useEffect(() => {
-    const handleGameEnd = (winner: PlayerType) => {
-      newHistoryRecord({
-        date: new Date(),
-        winner,
-        moves,
-      })
-    }
-
     const winner = checkWin(gameState);
-    const draw = checkDraw(gameState);
 
     if (winner) {
       handleGameEnd(winner)
       setWinner(winner);
-      setOpen(true);
-    } else if (draw) {
-      handleGameEnd('draw')
-      setWinner('draw');
       setOpen(true);
     }
   }, [gameState])
@@ -94,6 +89,19 @@ const Game: React.FC = () => {
     setWinner('');
     setOpen(false)
     newGame();
+  }
+
+  const showWinnerMessage = () => {
+    switch (winner) {
+      case 'X':
+        return <Typography variant="h3">You won</Typography>
+      case 'O':
+        return <Typography variant="h3">You lose</Typography>
+      case 'draw':
+        return <Typography variant="h3">Draw</Typography>
+      default:
+        break;
+    }
   }
 
   return <div className={classes.root}>
@@ -108,9 +116,7 @@ const Game: React.FC = () => {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          {winner === 'X' ? <h2 id="transition-modal-title">You won</h2> : null}
-          {winner === 'O' ? <h2 id="transition-modal-title">You lose</h2> : null}
-          {winner === 'draw' ? <h2 id="transition-modal-title">Draw</h2> : null}
+          {showWinnerMessage()}
           <NavButton to='/game' onClick={handleNewGame}>New Game</NavButton>
           <NavButton to='/' onClick={closeGame}>Back</NavButton>
         </div>
