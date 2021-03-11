@@ -1,25 +1,77 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useHistory } from "react-router";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { useActions } from "./hooks";
+import Game from "./components/Game";
+import History from "./components/History";
+import Info from "./components/Info";
+import Menu from "./components/Menu";
+import Options from "./components/Options";
+import { useMusic, useTypedSelector } from './hooks';
+import { setFullscreen } from "./utils/fullscreen";
 
-function App() {
+const App = () => {
+  const history = useHistory();
+  const { toggleFullscreen, toggleMusic, newGame, toggleSound } = useActions();
+  const { isFullscreen, isMusic } = useTypedSelector(state => state.options);
+  const { toggle } = useMusic('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
+
+  useEffect(() => {
+    isMusic ? toggle(true) : toggle(false);
+  }, [isMusic]);
+
+  useEffect(() => {
+    setFullscreen(isFullscreen);
+  }, [isFullscreen])
+
+  const handleKeyUp = (e: KeyboardEvent) => {
+    if (e.ctrlKey && e.altKey) {
+      switch (e.code) {
+        case 'KeyF':
+          toggleFullscreen();
+          break;
+        case 'KeyK':
+          toggleMusic();
+          break;
+        case 'KeyS':
+          toggleSound();
+          break;
+        case 'KeyR':
+          newGame();
+          history.push("/game");
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('keyup', handleKeyUp, false);
+    return () => {
+      document.removeEventListener('keyup', handleKeyUp, false);
+    };
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <Menu />
+      </Route>
+      <Route path="/game" >
+        <Game />
+      </Route>
+      <Route path="/info" >
+        <Info />
+      </Route>
+      <Route path="/options">
+        <Options />
+      </Route>
+      <Route path="/history">
+        <History />
+      </Route>
+      <Redirect to="/" />
+    </Switch>
   );
 }
 
