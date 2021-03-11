@@ -38,6 +38,12 @@ const useStyles = makeStyles({
 
 const Info: React.FC = () => {
   const classes = useStyles();
+  const hotkeys = [
+    { value: "ctrl + alt + n", description: 'new game' },
+    { value: "ctrl + alt + k", description: 'toggle music' },
+    { value: "ctrl + alt + s", description: 'toggle sounds' },
+    { value: "ctrl + alt + f", description: 'toggle fullscreen' },
+  ]
 
   return <div className={classes.root}>
     <Card className={classes.card}>
@@ -57,18 +63,15 @@ const Info: React.FC = () => {
         <br />
         <Typography variant="h6" component="h3" className={classes.title}>Hot Keys:</Typography>
         <List dense={true} className={classes.list}>
-          <ListItem>
-            <ListItemText primary="ctrl + alt + n" secondary='new game' />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="ctrl + alt + k" secondary='toggle music' />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="ctrl + alt + s" secondary='toggle sounds' />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="ctrl + alt + f" secondary='toggle fullscreen' />
-          </ListItem>
+          {hotkeys.map(item => (
+            <ListItem key={item.value}>
+              <ListItemText
+                primary={item.value}
+                secondary={item.description}
+              />
+            </ListItem>
+          )
+          )}
         </List>
         <Typography variant="body2" component="p" color="textSecondary" className={classes.year}>2021</Typography>
       </CardContent>
